@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Keys Input</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
+        .container { width: 80%; margin: auto; padding: 2rem 0; }
+        header { text-align: center; padding-bottom: 2rem; }
+        h1 { margin: 0; }
+        .input-group { margin-bottom: 1rem; }
+        .input-group label { display: block; margin-bottom: .5rem; }
+        .input-group input,
+        .input-group button { width: 100%; padding: .5rem; font-size: 1rem; margin-bottom: .5rem; }
+        button { cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>API Keys Management</h1>
+        </header>
+        <div class="input-group">
+            <label for="awsAccessKey">AWS Access Key:</label>
+            <input type="text" id="awsAccessKey" name="awsAccessKey" required>
+        </div>
+        <div class="input-group">
+            <label for="awsSecretKey">AWS Secret Key:</label>
+            <input type="password" id="awsSecretKey" name="awsSecretKey" required>
+        </div>
+        <div class="input-group">
+            <label for="githubPAT">GitHub PAT:</label>
+            <input type="password" id="githubPAT" name="githubPAT" required>
+        </div>
+        <div class="input-group">
+            <label for="openaiKey">OpenAI Key:</label>
+            <input type="password" id="openaiKey" name="openaiKey" required>
+        </div>
+        <div class="input-group">
+            <button type="button" onclick="saveAPIKeys()">Save</button>
+        </div>
+    </div>
+    
+    <script>
+        function saveAPIKeys() {
+            // Code to save the API keys to the server or local storage etc.
+            alert('Your API keys have been saved successfully!');
+        }
+    </script>
+</body>
+</html>
