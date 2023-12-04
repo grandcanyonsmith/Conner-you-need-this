@@ -1,12 +1,10 @@
-# New Code for saying "Hello, World!" and printing it
+# New Code:
 
-# Function definition
-def say_hello():
-    # Create a message
-    message = "Hello, World!"
-    # Print the message
-    print(message)
+def print_hello_world():
+    """
+    This function prints "Hello, World!" to the console.
+    """
+    print("Hello, World!")
 
-# Main program execution
-if __name__ == "__main__":
-    say_hello()
+if __name__ == '__main__':
+    print_hello_world()
