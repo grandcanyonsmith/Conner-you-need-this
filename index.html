@@ -4,41 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Keys Input</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
-        .container { width: 80%; margin: auto; padding: 2rem 0; }
-        header { text-align: center; padding-bottom: 2rem; }
-        h1 { margin: 0; }
-        .input-group { margin-bottom: 1rem; }
-        .input-group label { display: block; margin-bottom: .5rem; }
-        .input-group input,
-        .input-group button { width: 100%; padding: .5rem; font-size: 1rem; margin-bottom: .5rem; }
-        button { cursor: pointer; }
-    </style>
+    <!-- Ensure you add the Tailwind CSS link in your project -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>API Keys Management</h1>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="w-4/5 mx-auto py-8">
+        <header class="text-center pb-8">
+            <h1 class="text-xl font-semibold m-0">API Keys Management</h1>
         </header>
-        <div class="input-group">
-            <label for="awsAccessKey">AWS Access Key:</label>
-            <input type="text" id="awsAccessKey" name="awsAccessKey" required>
+        
+        <div class="mb-4">
+            <label for="awsAccessKey" class="block mb-2">AWS Access Key:</label>
+            <input type="text" 
+                   id="awsAccessKey" 
+                   name="awsAccessKey" 
+                   required 
+                   class="w-full px-2 py-1 border mb-4 rounded text-base">
         </div>
-        <div class="input-group">
-            <label for="awsSecretKey">AWS Secret Key:</label>
-            <input type="password" id="awsSecretKey" name="awsSecretKey" required>
+        
+        <div class="mb-4">
+            <label for="awsSecretKey" class="block mb-2">AWS Secret Key:</label>
+            <input type="password" 
+                   id="awsSecretKey" 
+                   name="awsSecretKey" 
+                   required 
+                   class="w-full px-2 py-1 border mb-4 rounded text-base">
         </div>
-        <div class="input-group">
-            <label for="githubPAT">GitHub PAT:</label>
-            <input type="password" id="githubPAT" name="githubPAT" required>
+        
+        <div class="mb-4">
+            <label for="githubPAT" class="block mb-2">GitHub PAT:</label>
+            <input type="password" 
+                   id="githubPAT" 
+                   name="githubPAT" 
+                   required 
+                   class="w-full px-2 py-1 border mb-4 rounded text-base">
         </div>
-        <div class="input-group">
-            <label for="openaiKey">OpenAI Key:</label>
-            <input type="password" id="openaiKey" name="openaiKey" required>
+        
+        <div class="mb-4">
+            <label for="openaiKey" class="block mb-2">OpenAI Key:</label>
+            <input type="password" 
+                   id="openaiKey" 
+                   name="openaiKey" 
+                   required 
+                   class="w-full px-2 py-1 border mb-4 rounded text-base">
         </div>
-        <div class="input-group">
-            <button type="button" onclick="saveAPIKeys()">Save</button>
+        
+        <div class="mb-4">
+            <button type="button" 
+                    onclick="saveAPIKeys()" 
+                    class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">
+                Save
+            </button>
         </div>
     </div>
     
