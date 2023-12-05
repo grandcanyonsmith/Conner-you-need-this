@@ -21,13 +21,21 @@
     font-size: 2em;
     cursor: pointer;
   }
+  #nameInputSection {
+    margin-bottom: 20px;
+  }
 </style>
 </head>
 <body>
 
 <main>
   <h1>Tic Tac Toe Game</h1>
-  <div id="gameBoard" class="board">
+  <section id="nameInputSection">
+    <input type="text" id="playerXName" placeholder="Enter Player X's name">
+    <input type="text" id="playerOName" placeholder="Enter Player O's name">
+    <button id="startButton">Start Game</button>
+  </section>
+  <div id="gameBoard" class="board" style="display: none;">
     <div data-cell-index="0"></div>
     <div data-cell-index="1"></div>
     <div data-cell-index="2"></div>
@@ -39,14 +47,18 @@
     <div data-cell-index="8"></div>
   </div>
   
-  <button id="restartButton">Restart Game</button>
+  <button id="restartButton" style="display: none;">Restart Game</button>
 </main>
 
 <script>
   const board = document.getElementById('gameBoard');
   const cells = Array.from(document.querySelectorAll('#gameBoard div'));
   const restartButton = document.getElementById('restartButton');
-  let currentPlayer = 'X';
+  const startButton = document.getElementById('startButton');
+  const playerXNameInput = document.getElementById('playerXName');
+  const playerONameInput = document.getElementById('playerOName');
+  let currentPlayerSymbol = 'X';
+  let currentPlayerName = '';
   const winningCombinations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -66,9 +78,10 @@
       return;
     }
 
-    placeMark(cell, currentPlayer);
+    placeMark(cell, currentPlayerSymbol);
     if (checkWin()) {
-      alert(currentPlayer + ' wins!');
+      alert(currentPlayerName + ' (' + currentPlayerSymbol + ') wins!');
+      restartGame();
       return;
     }
     if (checkDraw()) {
@@ -76,17 +89,17 @@
       restartGame();
       return;
     }
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    togglePlayer();
   };
 
-  const placeMark = (cell, currentPlayer) => {
-    cell.textContent = currentPlayer;
+  const placeMark = (cell, currentPlayerSymbol) => {
+    cell.textContent = currentPlayerSymbol;
   };
 
   const checkWin = () => {
     return winningCombinations.some(combination => {
       return combination.every(index => {
-        return cells[index].textContent.includes(currentPlayer);
+        return cells[index].textContent.includes(currentPlayerSymbol);
       });
     });
   };
@@ -101,7 +114,28 @@
     cells.forEach(cell => {
       cell.textContent = '';
     });
-    currentPlayer = 'X';
+    currentPlayerSymbol = 'X';
+    currentPlayerName = playerXNameInput.value || 'Player X';
+  };
+
+  const startGame = () => {
+    currentPlayerName = playerXNameInput.value || 'Player X';
+    board.style.display = 'grid';
+    restartButton.style.display = 'inline';
+    startButton.style.display = 'none';
+    playerXNameInput.disabled = true;
+    playerONameInput.disabled = true;
+    restartGame();
+  };
+
+  const togglePlayer = () => {
+    if (currentPlayerSymbol === 'X') {
+      currentPlayerSymbol = 'O';
+      currentPlayerName = playerONameInput.value || 'Player O';
+    } else {
+      currentPlayerSymbol = 'X';
+      currentPlayerName = playerXNameInput.value || 'Player X';
+    }
   };
 
   cells.forEach(cell => {
@@ -109,6 +143,7 @@
   });
 
   restartButton.addEventListener('click', restartGame);
+  startButton.addEventListener('click', startGame);
 </script>
 
 </body>
