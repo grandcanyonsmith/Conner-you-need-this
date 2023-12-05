@@ -7,63 +7,65 @@
     <!-- Ensure you add the Tailwind CSS link in your project -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 text-gray-800">
 
-    <div class="w-4/5 mx-auto py-8">
-        <header class="text-center pb-8">
-            <h1 class="text-xl font-semibold m-0">API Keys Management</h1>
-        </header>
-        
-        <div class="mb-4">
-            <label for="awsAccessKey" class="block mb-2">AWS Access Key:</label>
-            <input type="text" 
-                   id="awsAccessKey" 
-                   name="awsAccessKey" 
-                   required 
-                   class="w-full px-2 py-1 border mb-4 rounded text-base">
+<div class="flex items-start space-x-4">
+  <div class="flex-shrink-0">
+    <img class="inline-block h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+  </div>
+  <div class="min-w-0 flex-1">
+    <form action="#" class="relative">
+      <div class="overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+        <label for="comment" class="sr-only">Add your comment</label>
+        <textarea rows="3" name="comment" id="comment" class="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Add your comment..."></textarea>
+
+        <!-- Spacer element to match the height of the toolbar -->
+        <div class="py-2" aria-hidden="true">
+          <!-- Matches height of button in toolbar (1px border + 36px content height) -->
+          <div class="py-px">
+            <div class="h-9"></div>
+          </div>
         </div>
-        
-        <div class="mb-4">
-            <label for="awsSecretKey" class="block mb-2">AWS Secret Key:</label>
-            <input type="password" 
-                   id="awsSecretKey" 
-                   name="awsSecretKey" 
-                   required 
-                   class="w-full px-2 py-1 border mb-4 rounded text-base">
-        </div>
-        
-        <div class="mb-4">
-            <label for="githubPAT" class="block mb-2">GitHub PAT:</label>
-            <input type="password" 
-                   id="githubPAT" 
-                   name="githubPAT" 
-                   required 
-                   class="w-full px-2 py-1 border mb-4 rounded text-base">
-        </div>
-        
-        <div class="mb-4">
-            <label for="openaiKey" class="block mb-2">OpenAI Key:</label>
-            <input type="password" 
-                   id="openaiKey" 
-                   name="openaiKey" 
-                   required 
-                   class="w-full px-2 py-1 border mb-4 rounded text-base">
-        </div>
-        
-        <div class="mb-4">
-            <button type="button" 
-                    onclick="saveAPIKeys()" 
-                    class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">
-                Save
+      </div>
+
+      <div class="absolute inset-x-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
+        <div class="flex items-center space-x-5">
+          <div class="flex items-center">
+            <button type="button" class="-m-2.5 flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
+              </svg>
+              <span class="sr-only">Attach a file</span>
             </button>
+          </div>
+          <div class="flex items-center">
+            <div>
+              <label id="listbox-label" class="sr-only">Your mood</label>
+              <div class="relative">
+                <button type="button" class="relative -m-2.5 flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
+                  <span class="flex items-center justify-center">
+                    <!-- Placeholder label, show/hide based on listbox state. -->
+                    <span>
+                      <svg class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.536-4.464a.75.75 0 10-1.061-1.061 3.5 3.5 0 01-4.95 0 .75.75 0 00-1.06 1.06 5 5 0 007.07 0zM9 8.5c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S7.448 7 8 7s1 .672 1 1.5zm3 1.5c.552 0 1-.672 1-1.5S12.552 7 12 7s-1 .672-1 1.5.448 1.5 1 1.5z" clip-rule="evenodd" />
+                      </svg>
+                      <span class="sr-only">Add your mood</span>
+                    </span>
+                    <!-- Selected item label, show/hide based on listbox state. -->
+                    <span>
+                      <span class="flex h-8 w-8 items-center justify-center rounded-full bg-red-500">
+
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    
-    <script>
-        function saveAPIKeys() {
-            // Code to save the API keys to the server or local storage etc.
-            alert('Your API keys have been saved successfully!');
-        }
-    </script>
+        <div class="flex-shrink-0">
+          <button type="submit" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Post</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 </body>
 </html>
