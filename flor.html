@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Name Extractor</title>
+    <script type="text/javascript">
+        function extractTestName() {
+            // Get the full URL
+            const fullUrl = window.location.href;
+
+            // Create the URL object (for compatibility with all browsers)
+            const url = new URL(fullUrl);
+
+            // Extract the test name parameter from the URL
+            const testNameParam = url.searchParams.get('testName');
+
+            // Display the extracted test name on the page if it exists
+            if (testNameParam) {
+                // Trim the string to remove the test file method (e.g., "::test_profile")
+                const testName = testNameParam.split('::')[0];
+
+                // Display extracted part of test name
+                document.getElementById('test-name-display').textContent = testName;
+            } else {
+                document.getElementById('test-name-display').textContent = "No test name found in the URL.";
+            }
+        }
+        // Run the function when the window loads
+        window.onload = extractTestName;
+    </script>
+</head>
+<body>
+    <h1>Test Name Extractor</h1>
+    <p>The extracted test name is: <span id="test-name-display"></span></p>
+</body>
+</html>
