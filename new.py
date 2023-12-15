@@ -1,56 +1,45 @@
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-from collections import Counter
-import re
+def write_script_to_html_file(filename: str, script_content: str):
+    """
+    Write HTML content including a script to a file with the given filename.
 
-# Function to send an HTTP request and return the response content
-def get_webpage_content(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.content
-    else:
-        raise Exception(f"Failed to retrieve the webpage. Status code: {response.status_code}")
+    Parameters:
+    filename (str): The name of the HTML file where the content will be written.
+    script_content (str): The JavaScript content that will be written inside the HTML file.
+    """
+    # Ensure the filename provided ends with a .html extension
+    if not filename.endswith('.html'):
+        filename += '.html'
 
-# Function to extract text from HTML content using BeautifulSoup
-def extract_text_from_html(html_content):
-    soup = BeautifulSoup(html_content, 'html.parser')
-    text = soup.get_text(separator=' ', strip=True)
-    return text
+    # Define the basic HTML structure with the provided JavaScript content
+    content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript in HTML</title>
+</head>
+<body>
+    <script>
+    {script_content}
+    </script>
+</body>
+</html>"""
 
-# Function to count the frequency of each word in the text
-def count_word_frequencies(text):
-    words = re.findall(r'\w+', text.lower())
-    word_counts = Counter(words)
-    return word_counts
+    # Write the content to an HTML file with the given filename
+    with open(filename, 'w', encoding='utf-8') as file:
+        file.write(content)
 
-# Function to create a pandas DataFrame from word counts
-def create_dataframe_from_counts(word_counts):
-    df = pd.DataFrame(word_counts.most_common(), columns=['Word', 'Frequency'])
-    return df
+# JavaScript content to be inserted in the HTML script tag
+javascript_content = """function printHelloWorld() {
+  console.log("Hello, World!");
+}
 
-# Main script execution
-if __name__ == "__main__":
-    try:
-        # URL of the website to analyze
-        url = 'https://www.apple.com'
+printHelloWorld();"""
 
-        # Get the content of the webpage
-        content = get_webpage_content(url)
+# File name for the HTML
+script_name = "hello.html"
 
-        # Extract text from the HTML content
-        extracted_text = extract_text_from_html(content)
+# Function call to write the JavaScript content within an HTML file
+write_script_to_html_file(script_name, javascript_content)
 
-        # Count the frequencies of each word in the text
-        word_frequencies = count_word_frequencies(extracted_text)
-
-        # Create a DataFrame from the word frequencies
-        df_word_frequencies = create_dataframe_from_counts(word_frequencies)
-
-        # Print the DataFrame without truncating, to show all rows and columns
-        with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-            print(df_word_frequencies)  # This will print the entire DataFrame to the console
-
-    except Exception as e:
-        # Print the error message to the standard error stream
-        print(str(e), file=sys.stderr)
+print(f"The script has been written to {script_name}")
